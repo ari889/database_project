@@ -1,4 +1,8 @@
-<?php require_once 'functions.php'; ?>
+<?php
+require_once 'app/db.php';
+require_once 'app/functions.php';
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,14 +30,41 @@
 			//file upload
 			$image = $_FILES['image'];
 
-			
+			if(empty($name) || empty($email) || empty($cell) || empty($location) || empty($gender) || empty($age)){
+				$mess = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							  <strong>Warning!</strong> Field must not be empty.
+							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							    <span aria-hidden="true">&times;</span>
+							  </button>
+							</div>';
+			}else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+				$mess = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							  <strong>Warning!</strong> Invalid Email.
+							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							    <span aria-hidden="true">&times;</span>
+							  </button>
+							</div>';
+			}else{
+				$sql = "INSERT INTO users(name, email, cell, location, gender, age) VALUES('$name', '$email', '$cell', '$location', '$gender', '$age')";
+				$connection -> query($sql);
+				$mess = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+							  <strong>Success!</strong> Stident added successful.
+							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							    <span aria-hidden="true">&times;</span>
+							  </button>
+							</div>';
+			}
 		}
 
 	 ?>
 	<div class="custom_signup">
 		<a href="all-data.php" class="btn btn-info">All Data</a>
 		<h2 class="text-center">Sign Up</h2>
-		<div class="message"></div>
+		<div class="message">
+			<?php if(isset($mess)){
+				echo $mess;
+			} ?>
+		</div>
 		<form method="POST" enctype="multipart/form-data">
 		  <div class="form-group">
 		    <label for="exampleInputName1">Full Name</label>
@@ -63,7 +94,7 @@
 		  </div>
 			<div class="form-group">
 				<div class="form-check form-check-inline">
-				  <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+				  <input class="form-check-input" type="radio" name="gender" id="male" value="Male" checked="checked">
 				  <label class="form-check-label" for="male">Male</label>
 				</div>
 				<div class="form-check form-check-inline">
@@ -76,7 +107,7 @@
 		    <input name="age" type="text" class="form-control" id="age">
 		  </div>
 			<div class="form-group">
-		   <input type="checkbox" name="status" id="status" value="Published">
+		   <input type="checkbox" name="status" id="status" value="Published" checked="checked">
 			 <label for="status">Published</label>
 		  </div>
 		  <button name="submit" type="submit" class="btn btn-primary" value="Add">Submit</button>

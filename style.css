@@ -1,0 +1,16 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.custom_signup{
+	width: 500px;
+	margin: 20px auto;
+	-webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15);
+	-moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15);
+	box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15);
+	padding: 30px;
+}
+.custom-image{
+	width: 100px;
+	height: auto;
+}

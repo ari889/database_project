@@ -1,3 +1,8 @@
+<?php
+require_once 'app/db.php';
+require_once 'app/functions.php';
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +12,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-	<?php
-		$connection = new mysqli('localhost', 'root', '', 'awd416');
-		$sql = "INSERT INTO users (name, email, cell) VALUES ('Arijit Banarjee', 'arijitbanarjee889@gmail.com', '+8801733163337')";
-		$connection -> query($sql);
-	?>
+
 	<div class="container mt-5">
     <a href="index.php" class="btn btn-info">Add Data</a>
     <table class="table table-hover table-dark">
@@ -26,38 +27,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Arijit Banarjee</td>
-        <td>a@gmail.com</td>
-        <td>+8801700000000</td>
-        <td><img src="images/image.jpg" alt="" class="img-fluid custom-image"></td>
-        <td>25</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Arijit Banarjee</td>
-        <td>a@gmail.com</td>
-        <td>+8801700000000</td>
-        <td><img src="images/image.jpg" alt="" class="img-fluid custom-image"></td>
-        <td>25</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Arijit Banarjee</td>
-        <td>a@gmail.com</td>
-        <td>+8801700000000</td>
-        <td><img src="images/image.jpg" alt="" class="img-fluid custom-image"></td>
-        <td>25</td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Arijit Banarjee</td>
-        <td>a@gmail.com</td>
-        <td>+8801700000000</td>
-        <td><img src="images/image.jpg" alt="" class="img-fluid custom-image"></td>
-        <td>25</td>
-      </tr>
+      <?php
+        $sql = "SELECT * FROM users";
+        $data = $connection -> query($sql);
+
+        while($all_data = $data -> fetch_assoc()):
+       ?>
+        <tr>
+          <th scope="row">1</th>
+          <td><?php echo $all_data['name']; ?></td>
+          <td><?php echo $all_data['email']; ?></td>
+          <td><?php echo $all_data['cell']; ?></td>
+          <td><img src="images/image.jpg" alt="" class="img-fluid custom-image"></td>
+          <td>25</td>
+        </tr>
+      <?php endwhile; ?>
     </tbody>
   </table>
 	</div>

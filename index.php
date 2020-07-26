@@ -8,7 +8,28 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
+	<?php
 
+		// student data form setup
+
+		if(isset($_POST['submit'])){
+			// value get
+
+			$name = $_POST['name'];
+			$email = $_POST['email'];
+			$cell = $_POST['cell'];
+			$location = $_POST['location'];
+			$gender = $_POST['gender'];
+			$age = $_POST['age'];
+			$status = $_POST['status'];
+
+			//file upload
+			$image = $_FILES['image'];
+
+			
+		}
+
+	 ?>
 	<div class="custom_signup">
 		<a href="all-data.php" class="btn btn-info">All Data</a>
 		<h2 class="text-center">Sign Up</h2>
@@ -30,11 +51,35 @@
 		    <label for="image">Image</label>
 		    <input name="image" type="file" class="form-control" id="image">
 		  </div>
+			<div class="form-group">
+		    <label for="location">Location</label>
+				<select name="location" id="location" class="form-control">
+					<option value="Mirpur">Mirpur</option>
+					<option value="Uttara">Uttara</option>
+					<option value="Dhanmondi">Dhanmondi</option>
+					<option value="Gazipur">Gazipur</option>
+					<option value="Bonani">Bonani</option>
+				</select>
+		  </div>
+			<div class="form-group">
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+				  <label class="form-check-label" for="male">Male</label>
+				</div>
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="radio" name="gender" id="famale" value="Famale">
+				  <label class="form-check-label" for="famale">Famale</label>
+				</div>
+			</div>
 		  <div class="form-group">
 		    <label for="age">Age</label>
 		    <input name="age" type="text" class="form-control" id="age">
 		  </div>
-		  <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+			<div class="form-group">
+		   <input type="checkbox" name="status" id="status" value="Published">
+			 <label for="status">Published</label>
+		  </div>
+		  <button name="submit" type="submit" class="btn btn-primary" value="Add">Submit</button>
 		</form>
 	</div>
 	<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>

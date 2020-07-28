@@ -46,4 +46,16 @@
 
   }
 
+  function dataCheck($connection, $table, $col, $data){
+    //Email checked
+    $sql = "SELECT $col FROM $table WHERE $col = '$data'";
+    $email_data = $connection -> query($sql);
+    $num_email =  $email_data -> num_rows;
+    if($num_email > 0){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
  ?>

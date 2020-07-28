@@ -28,36 +28,6 @@ require_once 'app/functions.php';
 			$age = $_POST['age'];
 			$status = $_POST['status'];
 
-      //Email checked
-      $sql = "SELECT email FROM users WHERE email = '$email'";
-      $email_data = $connection -> query($sql);
-      $num_email =  $email_data -> num_rows;
-      if($num_email > 0){
-        $email_check = false;
-      }else{
-        $email_check = true;
-      }
-
-      //Cell checked
-      $sql = "SELECT cell FROM users WHERE cell = '$cell'";
-      $cell_data = $connection -> query($sql);
-      $num_cell =  $cell_data -> num_rows;
-      if($num_cell > 0){
-        $cell_check = false;
-      }else{
-        $cell_check = true;
-      }
-
-      //username checked
-      $sql = "SELECT username FROM users WHERE username = '$username'";
-      $username_data = $connection -> query($sql);
-      $num_username =  $username_data -> num_rows;
-      if($num_username > 0){
-        $username_check = false;
-      }else{
-        $username_check = true;
-      }
-
 			if(empty($name) || empty($email) || empty($cell) || empty($location) || empty($gender) || empty($age) || empty($username)){
 				$mess = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
 							  <strong>Warning!</strong> Field must not be empty.
@@ -72,21 +42,21 @@ require_once 'app/functions.php';
 							    <span aria-hidden="true">&times;</span>
 							  </button>
 							</div>';
-			}elseif($email_check === false){
+			}elseif(dataCheck($connection, 'users', 'email', $email) === false){
         $mess = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
 							  <strong>Warning!</strong> Email already exists.
 							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							    <span aria-hidden="true">&times;</span>
 							  </button>
 							</div>';
-      }elseif($username_check === false){
+      }elseif(dataCheck($connection, 'users', 'username', $username) === false){
         $mess = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
 							  <strong>Warning!</strong> Username already exists.
 							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							    <span aria-hidden="true">&times;</span>
 							  </button>
 							</div>';
-      }elseif($cell_check === false){
+      }elseif(dataCheck($connection, 'users', 'cell', $cell) === false){
         $mess = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
 							  <strong>Warning!</strong> Cell already exists.
 							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">

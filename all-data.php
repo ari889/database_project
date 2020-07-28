@@ -22,6 +22,8 @@ require_once 'app/functions.php';
         <th scope="col">Full Name</th>
         <th scope="col">Email</th>
         <th scope="col">Cell</th>
+        <th scope="col">Username</th>
+        <th scope="col">Location</th>
         <th scope="col">Image</th>
         <th scope="col">Age</th>
       </tr>
@@ -30,16 +32,18 @@ require_once 'app/functions.php';
       <?php
         $sql = "SELECT * FROM users";
         $data = $connection -> query($sql);
-
+        $i = 1;
         while($all_data = $data -> fetch_assoc()):
        ?>
         <tr>
-          <th scope="row">1</th>
+          <th scope="row"><?php echo $i;$i++; ?></th>
           <td><?php echo $all_data['name']; ?></td>
           <td><?php echo $all_data['email']; ?></td>
           <td><?php echo $all_data['cell']; ?></td>
-          <td><img src="images/image.jpg" alt="" class="img-fluid custom-image"></td>
-          <td>25</td>
+          <td><?php echo $all_data['username']; ?></td>
+          <td><?php echo $all_data['location']; ?></td>
+          <td><img src="students/<?php echo $all_data['image']; ?>" alt="" class="img-fluid custom-image"></td>
+          <td><?php echo $all_data['age']; ?></td>
         </tr>
       <?php endwhile; ?>
     </tbody>

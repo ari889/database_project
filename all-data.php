@@ -2,6 +2,23 @@
 require_once 'app/db.php';
 require_once 'app/functions.php';
 
+if(isset($_GET['delete_id'])){
+  $id = $_GET['delete_id'];
+  $p_name = $_GET['p_name'];
+
+  $sql = "DELETE FROM users WHERE id = '$id'";
+  $connection -> query($sql);
+
+  unlink('students/'.$p_name);
+
+  $mess = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Success!</strong> Successfully deleted.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>';
+}
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +32,11 @@ require_once 'app/functions.php';
 
 	<div class="container mt-5">
     <a href="index.php" class="btn btn-info">Add Data</a>
+    <?php
+    if(isset($mess)){
+      echo $mess;
+    }
+     ?>
     <table class="table table-hover table-dark">
     <thead>
       <tr>
@@ -48,7 +70,7 @@ require_once 'app/functions.php';
           <td>
             <a href="show.php?id=<?php echo $all_data['id']; ?>" class="btn btn-info">View</a>
             <a href="#" class="btn btn-warning">Edit</a>
-            <a href="#" class="btn btn-danger">Delete</a>
+            <a href="all-data.php?delete_id=<?php echo $all_data['id']; ?>&&p_name=<?php echo $all_data['image']; ?>" class="btn btn-danger" id="delete-btn">Delete</a>
           </td>
         </tr>
       <?php endwhile; ?>
@@ -57,5 +79,16 @@ require_once 'app/functions.php';
 	</div>
 	<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script>
+    $(document).on('click', '#delete-btn', function(){
+      let del = confirm('Are u sure to delete this?');
+
+      if(del == true){
+        return true;
+      }else{
+        return false;
+      }
+    });
+  </script>
 </body>
 </html>

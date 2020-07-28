@@ -26,6 +26,7 @@ require_once 'app/functions.php';
         <th scope="col">Location</th>
         <th scope="col">Image</th>
         <th scope="col">Age</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -44,6 +45,11 @@ require_once 'app/functions.php';
           <td><?php echo $all_data['location']; ?></td>
           <td><img src="students/<?php echo $all_data['image']; ?>" alt="" class="img-fluid custom-image"></td>
           <td><?php echo $all_data['age']; ?></td>
+          <td>
+            <a href="show.php?id=<?php echo $all_data['id']; ?>" class="btn btn-info">View</a>
+            <a href="#" class="btn btn-warning">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+          </td>
         </tr>
       <?php endwhile; ?>
     </tbody>
